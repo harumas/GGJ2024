@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Player;
 using UnityEngine;
 using Utility;
 
@@ -11,7 +12,7 @@ public class MicController : MonoBehaviour
     private float m_AudioLevel;
 
     [SerializeField] private GameObject m_Cube;
-    [SerializeField, Range(10, 100)] private float m_AmpGain = 10;
+    [SerializeField, Range(10, 500)] private float m_AmpGain = 10;
 
     [SerializeField] private float GameoverVolume;
 
@@ -34,6 +35,8 @@ public class MicController : MonoBehaviour
 
     void Update()
     {
+        if (Locator.Resolve<CameraController>().isPcSeeing) return;
+
         float[] waveData = GetUpdatedAudio();
         if (waveData.Length == 0)
         {
@@ -82,7 +85,7 @@ public class MicController : MonoBehaviour
 
     private void GameoverCheck(float AudioLevel)
     {
-        if(AudioLevel >= GameoverVolume)
+        if (AudioLevel >= GameoverVolume)
         {
             Debug.Log("ゲームオーバーだよ");
             GameEvent gameEvent = Locator.Resolve<GameEvent>();
