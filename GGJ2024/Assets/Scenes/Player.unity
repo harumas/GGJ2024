@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -573,9 +573,7 @@ GameObject:
   - component: {fileID: 1453864755}
   - component: {fileID: 1453864756}
   - component: {fileID: 1453864757}
-  - component: {fileID: 1453864759}
-  - component: {fileID: 1453864760}
-  - component: {fileID: 1453864761}
+  - component: {fileID: 1453864758}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -713,8 +711,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa269c47684cc4f48b5a9b875d2eb262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensibilityX: 1
-  sensibilityY: 1
+  sensibilityX: 0.1
+  sensibilityY: 0.1
   verticalClamp: {x: -60, y: 60}
   horizontalClamp: {x: -60, y: 60}
   defaultFOV: 60
@@ -735,33 +733,7 @@ MonoBehaviour:
   m_Cube: {fileID: 0}
   m_AmpGain: 10
   GameoverVolume: 0
---- !u!114 &1453864759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1453864751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abe4d96be07fd4aae8d899be130ba642, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volume: {fileID: 1603423584}
---- !u!114 &1453864760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1453864751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 806be35b0dd314f9ca08869e2aaa977b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 1000
---- !u!114 &1453864761
+--- !u!114 &1453864758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -776,7 +748,7 @@ MonoBehaviour:
   m_Actions: {fileID: -944628639613478452, guid: 49fd7c82ab7fd8c4fa4a1b84cf65cb1f,
     type: 3}
   m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 2047335478}
+  m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -786,19 +758,7 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0761e524-2db0-4ae4-a951-08a62b00dfe7
-    m_ActionName: Player/Move
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 49bcee0d-2a75-4319-91d1-f0fde9a987c9
-    m_ActionName: Player/Jump
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 91d48d31-3e22-4764-9e3b-f61e1123cb49
-    m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
+  m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1033,7 +993,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2047335480}
   - component: {fileID: 2047335479}
-  - component: {fileID: 2047335478}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1041,38 +1000,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2047335478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047335477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 49fd7c82ab7fd8c4fa4a1b84cf65cb1f,
-    type: 3}
-  m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: -1302354443276416329, guid: 49fd7c82ab7fd8c4fa4a1b84cf65cb1f,
-    type: 3}
-  m_SubmitAction: {fileID: 0}
-  m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: 0}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
 --- !u!114 &2047335479
 MonoBehaviour:
   m_ObjectHideFlags: 0
