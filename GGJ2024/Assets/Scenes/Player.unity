@@ -516,6 +516,7 @@ MonoBehaviour:
   m_DeviceName: 
   m_Cube: {fileID: 1061320724}
   m_AmpGain: 10
+  GameoverVolume: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
