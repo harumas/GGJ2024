@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1766955761454950200
+--- !u!114 &-6491096574673015441
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WhiteBoard
-  m_Shader: {fileID: -6465566751694194690, guid: fb9a728092d87c04ca57535df7deca10,
+  m_Name: Moniter
+  m_Shader: {fileID: -6465566751694194690, guid: e7b1e014a56af4949903498250527521,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -39,18 +39,6 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BoarBackTexture:
-        m_Texture: {fileID: 2800000, guid: 5a292877d0947864d9b6e9c429df60c5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BoardFrontTexture:
-        m_Texture: {fileID: 2800000, guid: 2ac56153787f26a4eaf718b3f95049fb, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BoardTexture:
-        m_Texture: {fileID: 2800000, guid: cc72d18ff80c38146a6deb780018e007, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -89,32 +77,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2b7a3d9e1ba94782bf6c1cd5b1e55fe2_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 68e619c9d39ba77459a4fcd507dd09d7, type: 3}
+    - _SampleTexture2D_5cde026ff58547be8792262dc0c465c7_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 767e351548855734fb7c434eeb322e68, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_5f4000bd0fe04c09b35d4a125f86b962_Texture_1_Texture2D:
-        m_Texture: {fileID: 0}
+    - _SampleTexture2D_b5d06a628fdf4da3b4bec8ff43411d49_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c83ed9060f5b6fe41bfe882bae0d7d4c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_7093325342004b47bfc31c48d91cbf20_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: ba49d73b78a1f204c81c77289e91426a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_9037254143234d9098b3473b672daff0_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: ba49d73b78a1f204c81c77289e91426a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_aaabbaa5749d42d6a83b0e40a5aee8b2_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: cecbd51e90713ec4cadc940d30294e20, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_c7e393d9b9a0431da416efdabc5b07ed_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: cecbd51e90713ec4cadc940d30294e20, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_ea257808203b4b328feb7daf7c3ffa3d_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 00e7499aefb57294da8df1a45409d5f8, type: 3}
+    - _SampleTexture2D_d3e04b7edaaf468c8ee5feefb5c422ed_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 0253d3ad4f01a734b919dcedd2ddc060, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -152,6 +124,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GrassMetalic: 2.89
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -167,16 +140,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BackOffset: {r: 0, g: 0.75, b: 0, a: 0}
-    - _BackTiling: {r: 1.01, g: 1.96, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FrontOffset: {r: 0, g: 1.83, b: 0, a: 0}
-    - _FrontTiling: {r: 1, g: 2.18, b: 0, a: 0}
-    - _MainBoard: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0}
-    - _MetalColor: {r: 0.28195086, g: 0.30188674, b: 0.29934978, a: 0}
-    - _Rails: {r: 0.8805031, g: 0.8805031, b: 0.8805031, a: 0}
+    - _GrassColor: {r: 0.65723264, g: 1, b: 0.9527217, a: 0}
+    - _MainColor: {r: 0.16909926, g: 0.19293472, b: 0.23899364, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _WhiteBoardColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SubColorColor: {r: 0.52990377, g: 0.70079666, b: 0.735849, a: 0}
   m_BuildTextureStacks: []
