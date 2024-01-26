@@ -1,5 +1,7 @@
 using UnityEngine;
-
+using DG.Tweening;
+using Utility;
+using UnityEngine.InputSystem;
 namespace Player
 {
     public class CameraController : MonoBehaviour
@@ -9,20 +11,30 @@ namespace Player
 
         [SerializeField] private Vector2 verticalClamp;
         [SerializeField] private Vector2 horizontalClamp;
-
-        private Transform camTransform;
+        [SerializeField] private float defaultFOV, focusFOV;
+        private PlayerInput playerInput;
 
         private float currentX, currentY;
         private bool cursorLock = true;
+        private Camera mainCamera;
+        private Vector3 startPos;
+
+        private void Awake()
+        {
+            Locator.Register(this);
+        }
 
         // Start is called before the first frame update
         void Start()
         {
+            startPos = transform.position;
+            playerInput = GetComponent<PlayerInput>();
+
             if (Camera.main != null)
             {
-                camTransform = Camera.main.transform;
+                mainCamera = Camera.main;
 
-                Vector3 rotation = camTransform.localRotation.eulerAngles;
+                Vector3 rotation = mainCamera.transform.localRotation.eulerAngles;
                 currentX = rotation.x;
                 currentY = rotation.y;
             }
@@ -34,15 +46,33 @@ namespace Player
 
         private void Update()
         {
-            currentY += Input.GetAxis("Mouse X") * sensibilityX;
-            currentX += -Input.GetAxis("Mouse Y") * sensibilityY;
+            Look();
+            UpdateCursorLock();
+
+            SetFocus();
+            SetPCSeeing();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                BackFromPC();
+            }
+        }
+
+
+        private Vector2 oldMousePosition;
+        private void Look()
+        {
+            if (isPcSeeing) return;
+            var look = playerInput.currentActionMap["Look"].ReadValue<Vector2>();
+            currentY += look.x * sensibilityX;
+            currentX -= look.y * sensibilityY;
 
             currentX = Mathf.Clamp(currentX, horizontalClamp.x, horizontalClamp.y);
             currentY = Mathf.Clamp(currentY, verticalClamp.x, verticalClamp.y);
 
-            camTransform.localRotation = Quaternion.Euler(currentX, currentY, 0);
+            mainCamera.transform.localRotation = Quaternion.Euler(currentX, currentY, 0);
 
-            UpdateCursorLock();
+            oldMousePosition = Input.mousePosition;
         }
 
         private void UpdateCursorLock()
@@ -57,6 +87,53 @@ namespace Player
             }
 
             Cursor.lockState = cursorLock ? CursorLockMode.Locked : CursorLockMode.None;
+        }
+
+        public bool isFocus { get; private set; }
+        public bool isPcSeeing { get; private set; }
+        private void SetFocus()
+        {
+            if (isPcSeeing) return;
+            isFocus = Input.GetMouseButton(1);
+            DOTween.To(() => mainCamera.fieldOfView, (v) => mainCamera.fieldOfView = v, isFocus ? focusFOV : defaultFOV, 0.2f);
+        }
+
+        public void MovePCPoint(Transform point)
+        {
+            ResetLookValue();
+            transform.position = point.position;
+            transform.localRotation = Quaternion.identity;
+        }
+
+        private void SetPCSeeing()
+        {
+            var pc = Locator.Resolve<RayController>().IsHitPC().collider;
+            if (pc == null) return;
+
+            if (pc.CompareTag("PC") && isFocus)
+            {
+                isPcSeeing = true;
+                Locator.Resolve<DepthController>().SetDepth(true);
+                MovePCPoint(pc.transform.Find("Point"));
+            }
+        }
+
+        private void BackFromPC()
+        {
+            if (!isPcSeeing) return;
+
+            transform.position = startPos;
+            ResetLookValue();
+            isPcSeeing = false;
+            isFocus = false;
+            Locator.Resolve<DepthController>().SetDepth(false);
+        }
+
+        private void ResetLookValue()
+        {
+            currentX = 0;
+            currentY = 0;
+            oldMousePosition = Input.mousePosition;
         }
     }
 }
