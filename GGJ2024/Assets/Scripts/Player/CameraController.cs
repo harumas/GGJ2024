@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using Utility;
 using UnityEngine.InputSystem;
+using System;
 namespace Player
 {
     public class CameraController : MonoBehaviour
@@ -46,6 +47,8 @@ namespace Player
 
         private void Update()
         {
+            if (Locator.Resolve<GameEvent>().isGameOver) return;
+
             Look();
             UpdateCursorLock();
 
@@ -57,7 +60,6 @@ namespace Player
                 BackFromPC();
             }
         }
-
 
         private Vector2 oldMousePosition;
         private void Look()
@@ -110,7 +112,7 @@ namespace Player
             var pc = Locator.Resolve<RayController>().IsHitPC().collider;
             if (pc == null) return;
 
-            if (pc.CompareTag("PC") && isFocus)
+            if (pc.CompareTag("PC") && Input.GetMouseButtonDown(1))
             {
                 isPcSeeing = true;
                 Locator.Resolve<DepthController>().SetDepth(true);
