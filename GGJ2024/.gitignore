@@ -73,3 +73,9 @@ crashlytics-build.properties
 
 .idea/**/workspace.xml
 .idea/**/tasks.xml
+
+# Mac
+.DS_Store
+
+# Vscode
+.vscode/
