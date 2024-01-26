@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using Utility;
+using Random = UnityEngine.Random;
 
 namespace Event
 {
@@ -11,18 +13,20 @@ namespace Event
 
         private int nextAnomalyEventCount;
         private int currentCount;
-        private AbstractEvent currentNormalEvent;
+        private NormalEvent currentNormalEvent;
         private AbstractEvent currentAnomalyEvent;
+        private TypingSystem typingSystem;
 
         private void Start()
         {
             nextAnomalyEventCount = anomalyEventRange.MakeValue();
-            
-            currentCount++;
-            ExecuteAbstractEvent(normalEvents);
+            typingSystem = Locator.Resolve<TypingSystem>();
+            typingSystem.OnTypingCompleted += OnTypingCompleted;
+
+            PlayNormalEvent();
         }
 
-        public void OnTypingCompleted()
+        private void OnTypingCompleted()
         {
             RewindEvent(currentNormalEvent);
 
@@ -31,14 +35,20 @@ namespace Event
                 RewindEvent(currentAnomalyEvent);
             }
 
-            currentCount++;
-            ExecuteAbstractEvent(normalEvents);
+            PlayNormalEvent();
 
             if (currentCount == nextAnomalyEventCount)
             {
-                ExecuteAbstractEvent(anomalyEvents);
+                currentAnomalyEvent = ExecuteAbstractEvent(anomalyEvents);
                 currentCount = 0;
             }
+        }
+
+        private void PlayNormalEvent()
+        {
+            currentCount++;
+            currentNormalEvent = ExecuteAbstractEvent(normalEvents) as NormalEvent;
+            typingSystem.StartTyping(currentNormalEvent).Forget();
         }
 
         private void RewindEvent(AbstractEvent abstractEvent)
@@ -47,19 +57,19 @@ namespace Event
             Destroy(abstractEvent.gameObject);
         }
 
-        private void ExecuteAbstractEvent(GameObject[] resources)
+        private AbstractEvent ExecuteAbstractEvent(GameObject[] resources)
         {
             GameObject original = resources[Random.Range(0, resources.Length)];
             GameObject executeEvent = Instantiate(original);
-
+            
             if (executeEvent.TryGetComponent(out AbstractEvent abstractEvent))
             {
                 abstractEvent.Play();
+                return abstractEvent;
             }
-            else
-            {
-                Debug.Log($"{nameof(AbstractEvent)}が実装されていません！");
-            }
+
+            Debug.Log($"{nameof(AbstractEvent)}が実装されていません！");
+            return null;
         }
     }
 }

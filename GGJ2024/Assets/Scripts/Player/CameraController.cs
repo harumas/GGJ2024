@@ -51,6 +51,11 @@ namespace Player
 
             SetFocus();
             SetPCSeeing();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                BackFromPC();
+            }
         }
 
 
@@ -91,7 +96,6 @@ namespace Player
             if (isPcSeeing) return;
             isFocus = Input.GetMouseButton(1);
             DOTween.To(() => mainCamera.fieldOfView, (v) => mainCamera.fieldOfView = v, isFocus ? focusFOV : defaultFOV, 0.2f);
-            Locator.Resolve<DepthController>().SetDepth(isFocus);
         }
 
         public void MovePCPoint(Transform point)
@@ -103,22 +107,26 @@ namespace Player
 
         private void SetPCSeeing()
         {
-            if (Input.GetMouseButtonDown(0) && isPcSeeing)
-            {
-                transform.position = startPos;
-                ResetLookValue();
-                isPcSeeing = false;
-                isFocus = false;
-            }
-
             var pc = Locator.Resolve<RayController>().IsHitPC().collider;
             if (pc == null) return;
 
             if (pc.CompareTag("PC") && isFocus)
             {
                 isPcSeeing = true;
+                Locator.Resolve<DepthController>().SetDepth(true);
                 MovePCPoint(pc.transform.Find("Point"));
             }
+        }
+
+        private void BackFromPC()
+        {
+            if (!isPcSeeing) return;
+
+            transform.position = startPos;
+            ResetLookValue();
+            isPcSeeing = false;
+            isFocus = false;
+            Locator.Resolve<DepthController>().SetDepth(false);
         }
 
         private void ResetLookValue()
