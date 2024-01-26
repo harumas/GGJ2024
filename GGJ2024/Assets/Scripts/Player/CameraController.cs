@@ -81,7 +81,6 @@ namespace Player
                 cursorLock = true;
             }
 
-            // Cursor.visible = !cursorLock;
             Cursor.lockState = cursorLock ? CursorLockMode.Locked : CursorLockMode.None;
         }
 
@@ -97,10 +96,8 @@ namespace Player
 
         public void MovePCPoint(Transform point)
         {
+            ResetLookValue();
             transform.position = point.position;
-            currentX = 0;
-            currentY = 0;
-            oldMousePosition = Input.mousePosition;
             transform.localRotation = Quaternion.identity;
         }
 
@@ -109,9 +106,7 @@ namespace Player
             if (Input.GetMouseButtonDown(0) && isPcSeeing)
             {
                 transform.position = startPos;
-                currentX = 0;
-                currentY = 0;
-                oldMousePosition = Input.mousePosition;
+                ResetLookValue();
                 isPcSeeing = false;
                 isFocus = false;
             }
@@ -124,6 +119,13 @@ namespace Player
                 isPcSeeing = true;
                 MovePCPoint(pc.transform.Find("Point"));
             }
+        }
+
+        private void ResetLookValue()
+        {
+            currentX = 0;
+            currentY = 0;
+            oldMousePosition = Input.mousePosition;
         }
     }
 }

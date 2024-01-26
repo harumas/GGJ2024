@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 1048295004}
   - component: {fileID: 1048295003}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -734,6 +734,7 @@ MonoBehaviour:
   m_DeviceName: 
   m_Cube: {fileID: 0}
   m_AmpGain: 10
+  GameoverVolume: 0
 --- !u!114 &1453864759
 MonoBehaviour:
   m_ObjectHideFlags: 0
