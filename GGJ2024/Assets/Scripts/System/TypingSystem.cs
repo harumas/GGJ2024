@@ -40,51 +40,52 @@ namespace System
             while (!this.GetCancellationTokenOnDestroy().IsCancellationRequested && !typingCanceller.IsCancellationRequested)
             {
                 await UniTask.Yield(PlayerLoopTiming.Update);
-                if (!isCameraFocusing)
+                if (!isCameraFocusing || currentAnswer.Length == normalEvent.Correct.Length)
                 {
                     continue;
                 }
 
                 foreach (char c in Input.inputString)
                 {
-                    if (!currentAnswer.Contains(c))
-                    {
-                        currentAnswer += c;
+                    currentAnswer += c;
 
+                    UpdateText(normalEvent);
+
+                    if (currentAnswer.Length == normalEvent.Correct.Length)
+                    {
+                        bool isCorrect = currentAnswer == normalEvent.Correct;
                         await UniTask.Delay(TimeSpan.FromSeconds(checkInterval), cancellationToken: this.GetCancellationTokenOnDestroy());
-                        //
-                        // if ()
-                        // {
-                        //     OnTypingCompleted?.Invoke();
-                        // }
-                        // else
-                        // {
-                        //     
-                        // }
-                        //
+
+                        if (isCorrect)
+                        {
+                            OnTypingCompleted?.Invoke();
+                        }
 
                         currentAnswer = String.Empty;
+                        UpdateText(normalEvent);
 
-                        string text = UpdateText(normalEvent);
+                        if (isCorrect)
+                        {
+                            return;
+                        }
                     }
                 }
             }
         }
 
-        private string UpdateText(NormalEvent normalEvent)
+        private void UpdateText(NormalEvent normalEvent)
         {
             string space = new string(Enumerable.Repeat('_', normalEvent.Correct.Length - currentAnswer.Length).ToArray());
             space = currentAnswer + space;
-            string text = normalEvent.Sentence.Replace("$", space);
 
             if (currentAnswer.Length == normalEvent.Correct.Length)
             {
-                text = currentAnswer == normalEvent.Correct ? $"<color=green>{text}</color>" : $"<color=red>{text}</color>";
+                space = currentAnswer == normalEvent.Correct ? $"<color=green>{space}</color>" : $"<color=red>{space}</color>";
             }
 
-            OnSetText?.Invoke(text);
+            string text = normalEvent.Sentence.Replace("$", space);
 
-            return space;
+            OnSetText?.Invoke(text);
         }
     }
 }

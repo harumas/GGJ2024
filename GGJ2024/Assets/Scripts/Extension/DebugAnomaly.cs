@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace Extension
 {
-    public class DebugAnomaly : NormalEvent
+    public class DebugAnomaly : AbstractEvent
     {
         public override void Play()
         {
-            Debug.Log("Play");
+            Debug.Log("PlayAnomaly");
         }
 
         public override void Rewind()
         {
-            Debug.Log("Rewind");
+            Debug.Log("RewindAnomaly");
         }
     }
 }

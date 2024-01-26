@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8565ef5b49b193045ab025314200d1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sentence: test&test
+  sentence: test$test
   correct: 12
