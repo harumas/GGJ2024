@@ -9,6 +9,8 @@ namespace System
 {
     public class TypingSystem : MonoBehaviour
     {
+        private const string characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
         public event Action<string> OnSetText;
         public event Action OnTypingCompleted;
 
@@ -47,6 +49,11 @@ namespace System
 
                 foreach (char c in Input.inputString)
                 {
+                    if (!characters.Contains(c))
+                    {
+                        continue;
+                    }
+                    
                     currentAnswer += c;
 
                     UpdateText(normalEvent);
