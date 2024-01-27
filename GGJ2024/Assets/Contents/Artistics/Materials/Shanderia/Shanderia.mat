@@ -139,7 +139,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LIghtColor: {r: 0.49126717, g: 0.43471575, b: 0.25799248, a: 0}
-    - _MetalColor: {r: 0.51572317, g: 0.48308504, b: 0.25461802, a: 0}
+    - _LIghtColor: {r: 4.541205, g: 2.9194674, b: 1.0710381, a: 0}
+    - _MetalColor: {r: 0.59748423, g: 0.53997576, b: 0.17849366, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
