@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Event
 {
-    public class AnomalyEventScheduler : MonoBehaviour
+    public class AnomalyEventSequencer : MonoBehaviour
     {
         [SerializeField] private GameObject[] normalEvents;
         [SerializeField] private GameObject[] anomalyEvents;
