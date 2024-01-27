@@ -17,7 +17,6 @@ namespace System
         [SerializeField] private string currentAnswer;
         [SerializeField] private bool isCameraFocusing;
         [SerializeField] private float checkInterval = 1f;
-        private CancellationTokenSource typingCanceller;
 
         private void Awake()
         {
@@ -36,10 +35,10 @@ namespace System
 
         public async UniTaskVoid StartTyping(NormalEvent normalEvent)
         {
+            currentAnswer = String.Empty;
             UpdateText(normalEvent);
-            typingCanceller = new CancellationTokenSource();
 
-            while (!this.GetCancellationTokenOnDestroy().IsCancellationRequested && !typingCanceller.IsCancellationRequested)
+            while (!this.GetCancellationTokenOnDestroy().IsCancellationRequested)
             {
                 await UniTask.Yield(PlayerLoopTiming.Update);
                 if (!isCameraFocusing)
@@ -54,7 +53,7 @@ namespace System
                         continue;
                     }
 
-                    if (currentAnswer.Length == normalEvent.Correct.Length)
+                    if (normalEvent.Correct.Length - currentAnswer.Length < 0)
                     {
                         continue;
                     }
@@ -78,6 +77,7 @@ namespace System
 
                         if (isCorrect)
                         {
+                            Debug.Log(currentAnswer);
                             return;
                         }
                     }
