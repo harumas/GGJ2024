@@ -3,6 +3,8 @@ using DG.Tweening;
 using Utility;
 using UnityEngine.InputSystem;
 using System;
+using UI;
+
 namespace Player
 {
     public class CameraController : MonoBehaviour
@@ -105,6 +107,8 @@ namespace Player
             ResetLookValue();
             transform.position = point.position;
             transform.localRotation = Quaternion.identity;
+            
+            Locator.Resolve<TypingSystem>().OnCameraFocused();
         }
 
         private void SetPCSeeing()
@@ -116,7 +120,7 @@ namespace Player
             {
                 isPcSeeing = true;
                 Locator.Resolve<DepthController>().SetDepth(true);
-                MovePCPoint(pc.transform.Find("Point"));
+                MovePCPoint(pc.transform.parent.Find("Point"));
             }
         }
 
@@ -129,6 +133,7 @@ namespace Player
             isPcSeeing = false;
             isFocus = false;
             Locator.Resolve<DepthController>().SetDepth(false);
+            Locator.Resolve<TypingSystem>().OnCameraUnfocused();
         }
 
         private void ResetLookValue()

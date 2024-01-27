@@ -9,7 +9,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI sentenceText;
         [SerializeField] private TypingSystem typingSystem;
 
-        private void Start()
+        private void Awake()
         {
             typingSystem.OnSetText += SetText;
         }
