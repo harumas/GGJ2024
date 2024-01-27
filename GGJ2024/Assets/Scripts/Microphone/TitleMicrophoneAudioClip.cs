@@ -4,7 +4,7 @@ using Player;
 using UnityEngine;
 using Utility;
 
-public class MicController : MonoBehaviour
+public class TitleMicController : MonoBehaviour
 {
     [SerializeField] private string m_DeviceName;
     private AudioClip m_AudioClip;
@@ -12,7 +12,7 @@ public class MicController : MonoBehaviour
     private float m_AudioLevel;
 
     [SerializeField] private GameObject m_Cube;
-    [SerializeField, Range(10, 500)] private float m_AmpGain = 10;
+    [SerializeField, Range(10, 500)] private float m_AmpGain = 1;
 
     [SerializeField] private float GameoverVolume;
 
@@ -32,23 +32,19 @@ public class MicController : MonoBehaviour
         Debug.Log($"=== Device Set: {targetDevice} ===");
         m_AudioClip = Microphone.Start(targetDevice, true, 10, 48000);
 
-        VolumeSettingController volumeSettingController = Locator.Resolve<VolumeSettingController>();
-        m_AmpGain = volumeSettingController.Volume;
-        Debug.Log(m_AmpGain);
+      
     }
 
     void Update()
     {
-        if (Locator.Resolve<CameraController>().isPcSeeing) return;
-
+      
         float[] waveData = GetUpdatedAudio();
         if (waveData.Length == 0)
         {
             return;
         }
         m_AudioLevel = waveData.Average(Mathf.Abs);
-        GameoverCheck(m_AmpGain * m_AudioLevel);
-        m_Cube.transform.localScale = new Vector3(1, 1 + m_AmpGain * m_AudioLevel, 1);
+        m_Cube.transform.localScale = new Vector3(0.5f, 0.5f +( m_AmpGain * m_AudioLevel*0.5f), 1);
     }
 
     private float[] GetUpdatedAudio()
@@ -86,14 +82,10 @@ public class MicController : MonoBehaviour
 
         return waveData;
     }
-
-    private void GameoverCheck(float AudioLevel)
+    public void AmpGainChange()
     {
-        if (AudioLevel >= GameoverVolume)
-        {
-            Debug.Log("ゲームオーバーだよ");
-            GameEvent gameEvent = Locator.Resolve<GameEvent>();
-            gameEvent.OnGameOver();
-        }
+        VolumeSettingController volumeSettingController = Locator.Resolve<VolumeSettingController>();
+        m_AmpGain = volumeSettingController.Volume;
     }
+   
 }
