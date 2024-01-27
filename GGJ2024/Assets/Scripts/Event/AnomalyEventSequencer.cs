@@ -54,15 +54,13 @@ namespace Event
         private void RewindEvent(AbstractEvent abstractEvent)
         {
             abstractEvent.Rewind();
-            Destroy(abstractEvent.gameObject);
         }
 
         private AbstractEvent ExecuteAbstractEvent(GameObject[] resources)
         {
             GameObject original = resources[Random.Range(0, resources.Length)];
-            GameObject executeEvent = Instantiate(original);
             
-            if (executeEvent.TryGetComponent(out AbstractEvent abstractEvent))
+            if (original.TryGetComponent(out AbstractEvent abstractEvent))
             {
                 abstractEvent.Play();
                 return abstractEvent;
