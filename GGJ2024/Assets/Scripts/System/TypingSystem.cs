@@ -73,13 +73,13 @@ namespace System
                         }
 
                         currentAnswer = String.Empty;
-                        UpdateText(normalEvent);
 
                         if (isCorrect)
                         {
-                            Debug.Log(currentAnswer);
                             return;
                         }
+                        
+                        UpdateText(normalEvent);
                     }
                 }
             }
