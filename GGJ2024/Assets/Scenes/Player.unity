@@ -1964,7 +1964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armBoneR: {fileID: 412673457}
   armBoneL: {fileID: 68899627}
-  multiplier: 1.4
+  multiplier: 1.6
 --- !u!1 &466373162
 GameObject:
   m_ObjectHideFlags: 0
