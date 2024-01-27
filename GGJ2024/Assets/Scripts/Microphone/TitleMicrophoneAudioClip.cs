@@ -44,7 +44,7 @@ public class TitleMicController : MonoBehaviour
             return;
         }
         m_AudioLevel = waveData.Average(Mathf.Abs);
-        m_Cube.transform.localScale = new Vector3(0.5f, 0.5f +( m_AmpGain * m_AudioLevel*0.5f), 1);
+        m_Cube.transform.localScale = new Vector3(1, 1 +m_AmpGain * m_AudioLevel, 1);
     }
 
     private float[] GetUpdatedAudio()
