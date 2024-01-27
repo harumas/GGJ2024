@@ -5467,7 +5467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DeviceName: 
-  m_Cube: {fileID: 879107712}
+  m_Cube: {fileID: 724954035}
   m_AmpGain: 10
   GameoverVolume: 0.7
 --- !u!114 &1453864759
