@@ -5,25 +5,36 @@ using Random = UnityEngine.Random;
 
 namespace Event
 {
+    [Serializable]
+    public struct AnomalyEventStamp
+    {
+        [SerializeField] private int normalCount;
+        [SerializeField] private GameObject eventObject;
+
+        public int NormalCount => normalCount;
+        public GameObject EventObject => eventObject;
+    }
+
     public class AnomalyEventSequencer : MonoBehaviour
     {
+        [SerializeField] private AnomalyEventStamp[] schedule;
         [SerializeField] private GameObject[] normalEvents;
-        [SerializeField] private GameObject[] anomalyEvents;
-        [SerializeField] private RandomInt anomalyEventRange;
 
         private int nextAnomalyEventCount;
         private int currentCount;
+        private int currentIndex;
         private NormalEvent currentNormalEvent;
         private AbstractEvent currentAnomalyEvent;
         private TypingSystem typingSystem;
 
         private void Start()
         {
-            nextAnomalyEventCount = anomalyEventRange.MakeValue();
+            nextAnomalyEventCount = schedule[0].NormalCount;
             typingSystem = Locator.Resolve<TypingSystem>();
             typingSystem.OnTypingCompleted += OnTypingCompleted;
 
             PlayNormalEvent();
+            PlayAnomalyEvent();
         }
 
         private void OnTypingCompleted()
@@ -36,19 +47,33 @@ namespace Event
             }
 
             PlayNormalEvent();
-
-            if (currentCount == nextAnomalyEventCount)
-            {
-                currentAnomalyEvent = ExecuteAbstractEvent(anomalyEvents);
-                currentCount = 0;
-            }
+            PlayAnomalyEvent();
         }
 
         private void PlayNormalEvent()
         {
             currentCount++;
-            currentNormalEvent = ExecuteAbstractEvent(normalEvents) as NormalEvent;
+            currentNormalEvent = ExecuteAbstractEvent(normalEvents[Random.Range(0, normalEvents.Length)]) as NormalEvent;
             typingSystem.StartTyping(currentNormalEvent).Forget();
+        }
+
+        private void PlayAnomalyEvent()
+        {
+            if (currentCount > nextAnomalyEventCount)
+            {
+                currentAnomalyEvent = ExecuteAbstractEvent(schedule[currentIndex].EventObject);
+                currentCount = 0;
+                currentIndex++;
+
+                if (currentIndex < schedule.Length)
+                {
+                    nextAnomalyEventCount = schedule[currentIndex].NormalCount;
+                }
+                else
+                {
+                    Debug.LogError("シーケンスが終了しました。");
+                }
+            }
         }
 
         private void RewindEvent(AbstractEvent abstractEvent)
@@ -56,10 +81,8 @@ namespace Event
             abstractEvent.Rewind();
         }
 
-        private AbstractEvent ExecuteAbstractEvent(GameObject[] resources)
+        private AbstractEvent ExecuteAbstractEvent(GameObject original)
         {
-            GameObject original = resources[Random.Range(0, resources.Length)];
-            
             if (original.TryGetComponent(out AbstractEvent abstractEvent))
             {
                 abstractEvent.Play();

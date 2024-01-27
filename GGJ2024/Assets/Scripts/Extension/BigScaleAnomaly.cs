@@ -1,4 +1,5 @@
-﻿using Event;
+﻿using DG.Tweening;
+using Event;
 using UnityEngine;
 
 namespace Extension
@@ -7,12 +8,13 @@ namespace Extension
     {
         [SerializeField] private Transform[] scaleObjects;
         [SerializeField] private float multiplier;
-        
+        [SerializeField] private float duration;
+
         public override void Play()
         {
             foreach (Transform scaleObject in scaleObjects)
             {
-                scaleObject.localScale *= multiplier;
+                scaleObject.DOScale(multiplier, duration).SetEase(Ease.InExpo);
             }
         }
 
