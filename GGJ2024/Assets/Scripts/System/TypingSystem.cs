@@ -10,7 +10,7 @@ namespace System
     public class TypingSystem : MonoBehaviour
     {
         private const string characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        
+
         public event Action<string> OnSetText;
         public event Action OnTypingCompleted;
 
@@ -42,7 +42,7 @@ namespace System
             while (!this.GetCancellationTokenOnDestroy().IsCancellationRequested && !typingCanceller.IsCancellationRequested)
             {
                 await UniTask.Yield(PlayerLoopTiming.Update);
-                if (!isCameraFocusing || currentAnswer.Length == normalEvent.Correct.Length)
+                if (!isCameraFocusing)
                 {
                     continue;
                 }
@@ -53,7 +53,12 @@ namespace System
                     {
                         continue;
                     }
-                    
+
+                    if (currentAnswer.Length == normalEvent.Correct.Length)
+                    {
+                        continue;
+                    }
+
                     currentAnswer += c;
 
                     UpdateText(normalEvent);
