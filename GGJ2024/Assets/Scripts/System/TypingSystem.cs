@@ -2,6 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Event;
+using UI;
 using UnityEngine;
 using Utility;
 
@@ -13,10 +14,15 @@ namespace System
 
         public event Action<string> OnSetText;
         public event Action OnTypingCompleted;
+        public event Action OnDeath;
 
         [SerializeField] private string currentAnswer;
         [SerializeField] private bool isCameraFocusing;
         [SerializeField] private float checkInterval = 1f;
+        [SerializeField] private LifeView lifeView;
+        [SerializeField] private int maxLife;
+        [SerializeField] private int currentDamage;
+
 
         private void Awake()
         {
@@ -78,8 +84,18 @@ namespace System
                         {
                             return;
                         }
-                        
-                        UpdateText(normalEvent);
+
+                        currentDamage++;
+                        lifeView.UpdateDamage(currentDamage);
+
+                        if (currentDamage >= maxLife)
+                        {
+                            OnDeath?.Invoke();
+                        }
+                        else
+                        {
+                            UpdateText(normalEvent);
+                        }
                     }
                 }
             }
