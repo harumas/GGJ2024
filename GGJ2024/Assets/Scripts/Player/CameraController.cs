@@ -95,11 +95,12 @@ namespace Player
 
         public bool isFocus { get; private set; }
         public bool isPcSeeing { get; private set; }
+        private Tweener tweener;
         private void SetFocus()
         {
             if (isPcSeeing) return;
             isFocus = Input.GetMouseButton(1);
-            DOTween.To(() => mainCamera.fieldOfView, (v) => mainCamera.fieldOfView = v, isFocus ? focusFOV : defaultFOV, 0.2f);
+            tweener = DOTween.To(() => mainCamera.fieldOfView, (v) => mainCamera.fieldOfView = v, isFocus ? focusFOV : defaultFOV, 0.2f);
         }
 
         public void MovePCPoint(Transform point)
@@ -107,7 +108,9 @@ namespace Player
             ResetLookValue();
             transform.position = point.position;
             transform.localRotation = Quaternion.identity;
-            
+            tweener.Kill();
+            mainCamera.fieldOfView = 40;
+
             Locator.Resolve<TypingSystem>().OnCameraFocused();
         }
 
