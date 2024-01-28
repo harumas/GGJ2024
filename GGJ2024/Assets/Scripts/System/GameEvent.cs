@@ -9,6 +9,7 @@ namespace System
     {
         [SerializeField] private CanvasGroup gameOverCanvasGroup;
         [SerializeField] private CanvasGroup gameClearCanvasGroup;
+         [SerializeField] private GameObject gameOverObj;
 
         public bool IsCameraLock { get; private set; }
 
@@ -24,6 +25,7 @@ namespace System
             Cursor.lockState = CursorLockMode.None;
 
             DOTween.To(() => gameOverCanvasGroup.alpha, (a) => gameOverCanvasGroup.alpha = a, 1, 0.3f)
+                     .SetDelay(5)
                 .OnComplete(() =>
                 {
                     gameOverCanvasGroup.blocksRaycasts = true;
