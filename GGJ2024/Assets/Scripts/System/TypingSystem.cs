@@ -2,6 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Event;
+using Player;
 using UI;
 using UnityEngine;
 using Utility;
@@ -14,7 +15,6 @@ namespace System
 
         public event Action<string> OnSetText;
         public event Action OnTypingCompleted;
-        public event Action OnDeath;
 
         [SerializeField] private string currentAnswer;
         [SerializeField] private bool isCameraFocusing;
@@ -90,7 +90,10 @@ namespace System
 
                         if (currentDamage >= maxLife)
                         {
-                            OnDeath?.Invoke();
+                            GameEvent gameEvent = Locator.Resolve<GameEvent>();
+                            CameraController cameraController = Locator.Resolve<CameraController>();
+                            cameraController.BackFromPC();
+                            gameEvent.OnGameOver();
                         }
                         else
                         {

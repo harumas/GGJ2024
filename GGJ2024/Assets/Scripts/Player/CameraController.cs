@@ -128,7 +128,7 @@ namespace Player
             }
         }
 
-        private void BackFromPC()
+        public void BackFromPC()
         {
             if (!isPcSeeing) return;
 

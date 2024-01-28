@@ -9,7 +9,7 @@ namespace System
     {
         [SerializeField] private CanvasGroup gameOverCanvasGroup;
         [SerializeField] private CanvasGroup gameClearCanvasGroup;
-         [SerializeField] private GameObject gameOverObj;
+        [SerializeField] private GameObject gameOverObj;
 
         public bool IsCameraLock { get; private set; }
 
@@ -20,12 +20,14 @@ namespace System
 
         public void OnGameOver()
         {
+            gameOverObj.SetActive(true);
+            Camera.main.transform.localRotation = Quaternion.identity;
             IsCameraLock = true;
 
             Cursor.lockState = CursorLockMode.None;
 
             DOTween.To(() => gameOverCanvasGroup.alpha, (a) => gameOverCanvasGroup.alpha = a, 1, 0.3f)
-                     .SetDelay(5)
+                .SetDelay(5)
                 .OnComplete(() =>
                 {
                     gameOverCanvasGroup.blocksRaycasts = true;
@@ -53,7 +55,7 @@ namespace System
             Debug.Log("Restart");
             SceneManager.LoadScene("Player");
         }
-        
+
         public void ReturnToTitle()
         {
             SceneManager.LoadScene("Title");

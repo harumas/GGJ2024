@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utility;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+
 public class PauseScript : MonoBehaviour
 {
     [SerializeField] private GameObject pauseCanvas;
