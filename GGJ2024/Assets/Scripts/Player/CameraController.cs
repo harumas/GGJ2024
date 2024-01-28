@@ -45,12 +45,14 @@ namespace Player
             {
                 Debug.LogError("カメラがありません");
             }
+
+            SetPCSeeing(true);
         }
 
         private void Update()
         {
             if (Locator.Resolve<PauseScript>().isPause) return;
-    		 if (Locator.Resolve<GameEvent>().IsCameraLock) return;
+            if (Locator.Resolve<GameEvent>().IsCameraLock) return;
 
             Look();
             UpdateCursorLock();
@@ -65,6 +67,7 @@ namespace Player
         }
 
         private Vector2 oldMousePosition;
+
         private void Look()
         {
             if (isPcSeeing) return;
@@ -97,6 +100,7 @@ namespace Player
         public bool isFocus { get; private set; }
         public bool isPcSeeing { get; private set; }
         private Tweener tweener;
+
         private void SetFocus()
         {
             if (isPcSeeing) return;
@@ -115,12 +119,12 @@ namespace Player
             Locator.Resolve<TypingSystem>().OnCameraFocused();
         }
 
-        private void SetPCSeeing()
+        private void SetPCSeeing(bool forceLook = false)
         {
             var pc = Locator.Resolve<RayController>().IsHitPC().collider;
             if (pc == null) return;
 
-            if (pc.CompareTag("PC") && Input.GetMouseButtonDown(1))
+            if (pc.CompareTag("PC") && (forceLook || Input.GetMouseButtonDown(1)))
             {
                 isPcSeeing = true;
                 Locator.Resolve<DepthController>().SetDepth(true);
