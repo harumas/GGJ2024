@@ -22,6 +22,7 @@ namespace System
         [SerializeField] private LifeView lifeView;
         [SerializeField] private int maxLife;
         [SerializeField] private int currentDamage;
+        [SerializeField] private AudioSource TypeSe;
 
 
         private void Awake()
@@ -63,6 +64,9 @@ namespace System
                     {
                         continue;
                     }
+
+                    TypeSe.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                    TypeSe.Play();
 
                     currentAnswer += c;
 
