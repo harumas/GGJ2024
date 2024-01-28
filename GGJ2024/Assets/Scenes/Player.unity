@@ -7656,6 +7656,12 @@ MonoBehaviour:
   - {fileID: 238577334}
   - {fileID: 2106088336}
   - {fileID: 1375068181}
+--- !u!4 &1894497132 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9188349551619318132, guid: 3cb5fc3b24824c2498bed3fd3f7b42ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1896579851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1896579851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7936,7 +7942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleObjects:
-  - {fileID: 0}
+  - {fileID: 1894497132}
   RotationgSpeed: {x: 2, y: 0, z: 0}
   HumanAnimator: {fileID: 0}
 --- !u!1001 &1989645459
