@@ -3073,6 +3073,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuaseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7867652265327133203, guid: 68238122a6feb4961983a14c3875dd4d,
+        type: 3}
+      propertyPath: m_text
+      value: CONTINUE
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7168,7 +7173,8 @@ PrefabInstance:
       value: 0.218
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2036490047950224564, guid: ead375aa6ee79ff4ba3fe9d9fe6ffb47, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ead375aa6ee79ff4ba3fe9d9fe6ffb47, type: 3}
