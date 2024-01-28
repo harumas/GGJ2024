@@ -7,6 +7,7 @@ public class RotationAnomaly : AbstractEvent
 {
     [SerializeField] private Transform[] scaleObjects;
     [SerializeField] private Vector3 RotationgSpeed;
+    [SerializeField] private Animator HumanAnimator;
     private Quaternion rotation;
     private bool RotationCheck = false;
     // Start is called before the first frame update
@@ -15,6 +16,11 @@ public class RotationAnomaly : AbstractEvent
         foreach (Transform scaleObject in scaleObjects)
         {
             rotation = scaleObject.transform.localRotation;
+         
+        }
+        if (HumanAnimator != null)
+        {
+            HumanAnimator.enabled = false;
         }
         RotationCheck = true;
     }
@@ -24,6 +30,10 @@ public class RotationAnomaly : AbstractEvent
         foreach (Transform scaleObject in scaleObjects)
         {
             scaleObject.transform.localRotation = rotation;
+        }
+        if (HumanAnimator != null)
+        {
+            HumanAnimator.enabled = true;
         }
         RotationCheck = false;
     }
