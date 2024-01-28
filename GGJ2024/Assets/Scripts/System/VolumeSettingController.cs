@@ -18,7 +18,7 @@ public class VolumeSettingController : MonoBehaviour
         VolumeSlider = GameObject.FindObjectOfType<Slider>();
         Volume = VolumeSlider.value;
     }
-  public void VolumeChange()
+    public void VolumeChange()
     {
         Volume = VolumeSlider.value;
     }
