@@ -46,6 +46,8 @@ namespace Player
                 Debug.LogError("カメラがありません");
             }
 
+            Cursor.lockState = CursorLockMode.Locked;
+
             SetPCSeeing(true);
         }
 
@@ -55,7 +57,7 @@ namespace Player
             if (Locator.Resolve<GameEvent>().IsCameraLock) return;
 
             Look();
-            UpdateCursorLock();
+            //UpdateCursorLock();
 
             SetFocus();
             SetPCSeeing();
@@ -81,20 +83,6 @@ namespace Player
             mainCamera.transform.localRotation = Quaternion.Euler(currentX, currentY, 0);
 
             oldMousePosition = Input.mousePosition;
-        }
-
-        private void UpdateCursorLock()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                cursorLock = !cursorLock;
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                cursorLock = true;
-            }
-
-            Cursor.lockState = cursorLock ? CursorLockMode.Locked : CursorLockMode.None;
         }
 
         public bool isFocus { get; private set; }
