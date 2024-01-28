@@ -2662,7 +2662,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ac59104ce0a435497a84cf0b606e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 466373167}
+  gameOverCanvasGroup: {fileID: 0}
+  gameClearCanvasGroup: {fileID: 0}
+  gameOverObj: {fileID: 0}
 --- !u!1001 &485377478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7920,7 +7922,7 @@ MonoBehaviour:
   - {fileID: 1380238408}
   - {fileID: 197836491}
   - {fileID: 1194126896}
-  PlusPos: {x: 0, y: 0.3, z: 3}
+  PlusPos: {x: 0, y: 0, z: 3}
   Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   PlusScale: {x: -0.5, y: -0.5, z: -0.5}
 --- !u!1 &1507285243
