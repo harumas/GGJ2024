@@ -2,7 +2,6 @@ using Event;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public class PositionChangeAnomary : AbstractEvent
 {
