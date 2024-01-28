@@ -35,7 +35,8 @@ public class MicController : MonoBehaviour
         m_AudioClip = Microphone.Start(targetDevice, true, 10, 48000);
 
         VolumeSettingController volumeSettingController = Locator.Resolve<VolumeSettingController>();
-        m_AmpGain = volumeSettingController.Volume;
+        m_AmpGain = volumeSettingController != null ? volumeSettingController.Volume : 10f;
+
         Debug.Log(m_AmpGain);
     }
 
@@ -48,6 +49,7 @@ public class MicController : MonoBehaviour
         {
             return;
         }
+
         m_AudioLevel = waveData.Average(Mathf.Abs);
         GameoverCheck(m_AmpGain * m_AudioLevel);
         m_Cube.transform.localScale = new Vector3(1, 1 + m_AmpGain * m_AudioLevel, 1);
