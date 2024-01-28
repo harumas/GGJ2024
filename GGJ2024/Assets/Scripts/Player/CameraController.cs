@@ -49,7 +49,8 @@ namespace Player
 
         private void Update()
         {
-            if (Locator.Resolve<GameEvent>().IsCameraLock) return;
+            if (Locator.Resolve<PauseScript>().isPause) return;
+    		 if (Locator.Resolve<GameEvent>().IsCameraLock) return;
 
             Look();
             UpdateCursorLock();
@@ -83,7 +84,7 @@ namespace Player
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                cursorLock = false;
+                cursorLock = !cursorLock;
             }
             else if (Input.GetMouseButton(0))
             {
