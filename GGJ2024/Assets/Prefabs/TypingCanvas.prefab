@@ -138,6 +138,7 @@ MonoBehaviour:
   lifeView: {fileID: 0}
   maxLife: 3
   currentDamage: 0
+  TypeSe: {fileID: 0}
 --- !u!1 &2036490047950224564
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b2d738d99112f7e4b8aabf0767c37ca4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2a97d0ef46deee49957463ec1dd0324, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
