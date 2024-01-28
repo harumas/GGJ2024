@@ -71,7 +71,8 @@ namespace Event
                 }
                 else
                 {
-                    Debug.LogError("シーケンスが終了しました。");
+                    Locator.Resolve<GameEvent>().OnGameClear();
+                    Debug.LogError("ゲームクリア");
                 }
             }
         }
