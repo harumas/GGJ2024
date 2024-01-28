@@ -49,7 +49,7 @@ namespace Player
 
         private void Update()
         {
-            if (Locator.Resolve<GameEvent>().isGameOver) return;
+            if (Locator.Resolve<GameEvent>().IsCameraLock) return;
 
             Look();
             UpdateCursorLock();
