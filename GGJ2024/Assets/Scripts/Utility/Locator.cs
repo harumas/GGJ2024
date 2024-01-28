@@ -25,7 +25,8 @@ namespace Utility
                 return (T)value;
             }
 
-            throw new NullReferenceException($"存在しないインスタンスを取得しています！\nType: {typeof(T)}");
+            //throw new NullReferenceException($"存在しないインスタンスを取得しています！\nType: {typeof(T)}");
+            return null;
         }
 
         /// <summary>
