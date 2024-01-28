@@ -35,7 +35,7 @@ public class ButtonController : MonoBehaviour
         program.interactable = true;
         program.blocksRaycasts = true;
         await DOTween.To(() => program.alpha, (a) => program.alpha = a, 1, 0.3f).AsyncWaitForCompletion();
-        await UniTask.Delay(1000);
+        await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0));
 
         SceneManager.LoadScene("Player");
     }
