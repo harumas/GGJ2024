@@ -14,8 +14,8 @@ namespace Extension
             for (int i = 0; i < targetCharacters.Count; i++)
             {
                 targetCharacters[i].SetActive(false);
-                changedCharacters[i].transform.position = targetCharacters[i].transform.position;
-                changedCharacters[i].transform.rotation = targetCharacters[i].transform.rotation;
+                // changedCharacters[i].transform.position = targetCharacters[i].transform.position;
+                // changedCharacters[i].transform.rotation = targetCharacters[i].transform.rotation;
                 changedCharacters[i].SetActive(true);
             }
         }

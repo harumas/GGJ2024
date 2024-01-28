@@ -61,19 +61,23 @@ namespace Event
         {
             if (currentCount > nextAnomalyEventCount)
             {
-                currentAnomalyEvent = ExecuteAbstractEvent(schedule[currentIndex].EventObject);
-                currentCount = 0;
-                currentIndex++;
 
-                if (currentIndex < schedule.Length)
-                {
-                    nextAnomalyEventCount = schedule[currentIndex].NormalCount;
-                }
-                else
+                if (currentIndex >= schedule.Length)
                 {
                     Locator.Resolve<GameEvent>().OnGameClear();
                     Debug.LogError("ゲームクリア");
+                    return;
                 }
+
+                currentAnomalyEvent = ExecuteAbstractEvent(schedule[currentIndex].EventObject);
+                currentCount = 0;
+
+                // if (currentIndex < schedule.Length)
+                // {
+                //     nextAnomalyEventCount = schedule[currentIndex].NormalCount;
+                // }
+
+                currentIndex++;
             }
         }
 
