@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Player;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 
 public class TitleMicController : MonoBehaviour
@@ -11,10 +12,8 @@ public class TitleMicController : MonoBehaviour
     private int m_LastAudioPos;
     private float m_AudioLevel;
 
-    [SerializeField] private GameObject m_Cube;
+    [SerializeField] private Slider volumeSlider;
     [SerializeField, Range(10, 500)] private float m_AmpGain = 1;
-
-    [SerializeField] private float GameoverVolume;
 
     void Start()
     {
@@ -32,8 +31,6 @@ public class TitleMicController : MonoBehaviour
 
         Debug.Log($"=== Device Set: {targetDevice} ===");
         m_AudioClip = Microphone.Start(targetDevice, true, 10, 48000);
-
-
     }
 
     void Update()
@@ -45,7 +42,7 @@ public class TitleMicController : MonoBehaviour
             return;
         }
         m_AudioLevel = waveData.Average(Mathf.Abs);
-        m_Cube.transform.localScale = new Vector3(1, 1 + m_AmpGain * m_AudioLevel, 1);
+        volumeSlider.value = m_AmpGain * m_AudioLevel;
     }
 
     private float[] GetUpdatedAudio()
