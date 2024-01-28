@@ -28,6 +28,8 @@ public class MicController : MonoBehaviour
                 targetDevice = device;
             }
         }
+        targetDevice = m_DeviceName;
+        Debug.Log(targetDevice);
 
         Debug.Log($"=== Device Set: {targetDevice} ===");
         m_AudioClip = Microphone.Start(targetDevice, true, 10, 48000);

@@ -7,6 +7,7 @@ namespace System
     public class GameEvent : MonoBehaviour
     {
         [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] private GameObject gameOverObj;
 
         public bool isGameOver { get; private set; }
 
@@ -25,11 +26,14 @@ namespace System
 
         public void OnGameOver()
         {
+            gameOverObj.SetActive(true);
+            Camera.main.transform.localRotation = Quaternion.identity;
             isGameOver = true;
 
             Cursor.lockState = CursorLockMode.None;
 
             DOTween.To(() => canvasGroup.alpha, (a) => canvasGroup.alpha = a, 1, 0.3f)
+            .SetDelay(5)
             .OnComplete(() =>
             {
                 canvasGroup.blocksRaycasts = true;
