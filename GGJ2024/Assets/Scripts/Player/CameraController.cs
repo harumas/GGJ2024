@@ -49,6 +49,7 @@ namespace Player
 
         private void Update()
         {
+            if (Locator.Resolve<PauseScript>().isPause) return;
             if (Locator.Resolve<GameEvent>().isGameOver) return;
 
             Look();
@@ -83,7 +84,7 @@ namespace Player
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                cursorLock = false;
+                cursorLock = !cursorLock;
             }
             else if (Input.GetMouseButton(0))
             {
