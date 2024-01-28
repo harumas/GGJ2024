@@ -26,25 +26,26 @@ public class TitleMicController : MonoBehaviour
             if (device.Contains(m_DeviceName))
             {
                 targetDevice = device;
+                break;
             }
         }
 
         Debug.Log($"=== Device Set: {targetDevice} ===");
         m_AudioClip = Microphone.Start(targetDevice, true, 10, 48000);
 
-      
+
     }
 
     void Update()
     {
-      
+
         float[] waveData = GetUpdatedAudio();
         if (waveData.Length == 0)
         {
             return;
         }
         m_AudioLevel = waveData.Average(Mathf.Abs);
-        m_Cube.transform.localScale = new Vector3(1, 1 +m_AmpGain * m_AudioLevel, 1);
+        m_Cube.transform.localScale = new Vector3(1, 1 + m_AmpGain * m_AudioLevel, 1);
     }
 
     private float[] GetUpdatedAudio()
@@ -87,5 +88,5 @@ public class TitleMicController : MonoBehaviour
         VolumeSettingController volumeSettingController = Locator.Resolve<VolumeSettingController>();
         m_AmpGain = volumeSettingController.Volume;
     }
-   
+
 }

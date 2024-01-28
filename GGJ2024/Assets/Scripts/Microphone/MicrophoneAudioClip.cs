@@ -42,6 +42,7 @@ public class MicController : MonoBehaviour
 
     void Update()
     {
+        if (Locator.Resolve<PauseScript>().isPause) return;
         if (Locator.Resolve<CameraController>().isPcSeeing) return;
 
         float[] waveData = GetUpdatedAudio();
