@@ -7,6 +7,17 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private CanvasGroup SettingsMenu;
     [SerializeField] private CanvasGroup program;
 
+    void Start()
+    {
+        SettingsMenu.interactable = false;
+        SettingsMenu.blocksRaycasts = false;
+        SettingsMenu.alpha = 0;
+
+        program.interactable = false;
+        program.blocksRaycasts = false;
+        program.alpha = 0;
+    }
+
     public void ViewSetting()
     {
         SettingsMenu.interactable = true;
